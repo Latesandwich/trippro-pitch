@@ -1,7 +1,7 @@
 // Offline cache for the pitch deck. tools/precache.py rewrites VERSION and PRECACHE; do not edit them by hand.
 // Network first (3 s), then the cache, so edits show up online and the deck still opens with no signal.
 /* precache:start */
-const VERSION = "7ef692607ec95800";
+const VERSION = "4913f66f087d4cac";
 const PRECACHE = [
   "./",
   "assets/26c5e1e7500a049f42247d06c2b1448a.jpg",
