@@ -54,10 +54,8 @@ async function fetchText(url, tries = 4) {
 // turn each newline of the plain text into a <br>.
 function keepNoteBreaks(aside) {
   for (const node of [...aside.childNodes]) {
-    if (node.nodeType !== Node.TEXT_NODE || !node.data.includes('
-')) continue;
-    const parts = node.data.split('
-');
+    if (node.nodeType !== Node.TEXT_NODE || !node.data.includes('\n')) continue;
+    const parts = node.data.split('\n');
     const nodes = parts.flatMap((part, i) => (i ? [document.createElement('br'), document.createTextNode(part)] : [document.createTextNode(part)]));
     node.replaceWith(...nodes);
   }
