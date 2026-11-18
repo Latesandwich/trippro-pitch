@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<base href="../">
+<title>TripPRO reference render</title>
+<link rel="icon" href="assets/f8a6af08e2ac174d5baec191de744051.png">
+<!-- The artifact viewer's base CSS, then the deck's own CSS: every slide as the artifact shows it, without reveal.js. -->
+<style>
+* { margin: 0 }
+body { font: 32px/1.2 sans-serif }
+h1 { font-size: 96px; font-weight: 600 }
+h2 { font-size: 64px; font-weight: 600 }
+h3 { font-size: 44px; font-weight: 600 }
+p, li, h1, h2, h3, td, th { overflow-wrap: break-word; text-wrap: pretty }
+x-icon, x-shape { display: block }
+section { width: 1920px; height: 1080px; box-sizing: border-box; position: relative; isolation: isolate; overflow: hidden }
+aside { display: none }
+</style>
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/deck.css">
+<script type="module">
+import './js/elements.js';
+
+window.__ref = { done: false };
+const meta = await (await fetch('deck.json')).json();
+const html = await Promise.all(meta.order.map(id => fetch(`slides/${id}.html`).then(r => r.text())));
+for (const text of html) document.body.insertAdjacentHTML('beforeend', text.trim());
+const faces = ['400 32px Anuphan', '500 32px Anuphan', '600 32px Anuphan', '700 32px Anuphan',
+  '400 32px Inter', '500 32px Inter', '600 32px Inter',
+  '400 32px "Noto Sans Thai"', '600 32px "Noto Sans Thai"', '700 32px "Noto Sans Thai"'];
+await Promise.all(faces.map(face => document.fonts.load(face, 'Aก').catch(() => [])));
+document.body.offsetHeight;
+await document.fonts.ready;
+window.__ref.done = true;
+</script>
+</head>
+<body>
+</body>
+</html>

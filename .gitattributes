@@ -1,0 +1,6 @@
+# vendor/MANIFEST.json pins these files by sha256: keep their bytes exact in every checkout.
+vendor/** -text
+fonts/** binary
+# Batch files want CRLF; a CRLF shebang breaks the macOS launcher.
+*.cmd text eol=crlf
+*.command text eol=lf

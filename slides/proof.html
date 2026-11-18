@@ -1,0 +1,26 @@
+<section id="proof" class="content dark" data-transition="fade">
+<p class="eyebrow">ผลการใช้งานจากทริปทดสอบ</p>
+<h2 class="h w1600">TripPRO เห็นทันที แจ้งคนนำ คนหลง และคนท้าย</h2>
+<div class="grow"></div>
+<div style="display:flex; gap:56px; align-items:flex-start">
+<div class="stack in1" style="width:262px; gap:12px"><p class="lead ink">แผนที่ขึ้นสีแดง</p><img class="shot" src="assets/26c5e1e7500a049f42247d06c2b1448a.jpg" alt="แผนที่สมาชิกใน LINE: เส้นทางดอยอินทนนท์ 88.6 กม. และสมาชิก 2 คนขึ้นสถานะออกนอกเส้นทางมาก" style="width:262px; height:442px"></div>
+<div class="stack in2" style="width:442px; gap:12px"><p class="lead ink">แจ้งในแชท LINE</p><img src="assets/fc5b6cac1650ab9dfadbcdf8bf2366d1.png" alt="ข้อความจาก TripPRO ใน LINE: สมาชิกออกนอกเส้นทาง 1619 และ 1640 เมตร แล้วกลับเข้าเส้นทาง" class="shot" style="border-radius:20px;width:423px;height:445px;box-sizing:border-box;flex:0 0 auto"></div>
+<div class="stack in3" style="width:442px; gap:12px"><p class="lead ink">แจ้งเตือนเด้งบนมือถือ</p><img class="shot" src="assets/ef8daf379a0459a5c2a35ab3bf761d09.png" alt="แจ้งเตือนบนหน้าจอล็อก: LINE จาก TripPRO และแอป TripPRO GPS ว่าสมาชิกกลับเข้าเส้นทางแล้ว" style="width:442px; height:447px"></div>
+<div class="stack in4" style="width:340px; gap:40px">
+<div class="stack ruled" style="gap:16px"><p class="label acc">แจ้งเตือนถึง</p><div class="diag" style="width:340px; height:224px"><svg width="340" height="224" viewBox="0 0 340 224" aria-label="ขบวนรถเรียงจากคนนำด้านบนถึงคนท้ายด้านล่าง มีหนึ่งคันแยกออกนอกเส้นทาง คนนำ คนหลง และคนท้ายได้รับแจ้งเตือน คันอื่นในขบวนไม่ถูกรบกวน"><line x1="40" y1="22" x2="40" y2="200" stroke="#4A4E56" stroke-width="4" stroke-linecap="round"/><path d="M40 134 C 72 142, 112 150, 148 150" fill="none" stroke="#F08A4B" stroke-width="3" stroke-dasharray="8 7"/><circle cx="40" cy="74" r="9" fill="#8E929A"/><circle cx="40" cy="116" r="9" fill="#8E929A"/><circle cx="40" cy="22" r="22" fill="#F08A4B" fill-opacity="0.22"/><circle cx="40" cy="22" r="12" fill="#F08A4B"/><circle cx="160" cy="150" r="22" fill="#F08A4B" fill-opacity="0.22"/><circle cx="160" cy="150" r="12" fill="#F08A4B"/><circle cx="40" cy="200" r="22" fill="#F08A4B" fill-opacity="0.22"/><circle cx="40" cy="200" r="12" fill="#F08A4B"/></svg><p class="label" style="position:absolute; left:80px; top:0px">คนนำ</p><p class="label" style="position:absolute; left:198px; top:128px">คนหลง</p><p class="label" style="position:absolute; left:80px; top:178px">คนท้าย</p></div></div>
+<div class="stack ruled hot" style="gap:8px"><p class="num acc">~5 นาที</p><p class="small ink">ทั้งขบวนกลับเข้าเส้นทาง</p></div>
+</div>
+</div>
+<div class="foot"><p class="brand">TripPRO</p><div class="credit"></div><div class="pn"></div></div>
+<aside>SAY (TH): ทันทีที่หลุดเส้นทาง แผนที่สมาชิกใน LINE ขึ้นสีแดง ว่าออกนอกเส้นทางมาก TripPRO แจ้ง 3 คนที่ต้องรู้ คือคนนำ คนหลง และคนท้าย ส่งข้อความใน LINE ว่าใครหลุด ห่างจากเส้นทางกี่เมตร และมีแจ้งเตือนเด้งขึ้นบนมือถือ โดยไม่ต้องเปิดแอป คนนำชะลอรอได้ คนท้ายตามไปดูได้ คนหลงรู้ตัวและเลี้ยวกลับ ส่วนคนอื่นในขบวนไม่ถูกรบกวน พอกลับเข้าเส้นทาง ระบบก็แจ้งทั้ง 3 คนอีกครั้ง ทั้งขบวนกลับเข้าเส้นทางได้ในราว 5 นาที
+
+PITCH CANVAS BLOCK: Product Demo and Customer Traction: real screenshots from the field test, not mock-ups.
+
+WHY THIS IS ON THE SLIDE: three real screens in the order things happened (map, LINE message, phone notification), and one result. Off-route alerts: TxNK 1,619 m and Phuwich.k 1,640 m; back on route at 6 m and 1 m; about 5 minutes between the alerts in the LINE chat. Real screenshots from the test ride; map © OpenStreetMap.
+
+WHO GETS ALERTED (backend/src/line-trip-alert-notifier.ts, app/lib/alerts.dart): the rider's own phone warns first when they leave the route (about 150 m for 30 s). If they stay off it (about 300 m for 90 s), TripPRO sends a LINE message and a phone notification to the leader and the sweeper, and to the rider too, whose phone then says หัวหน้าและท้ายขบวนได้รับแจ้งแล้ว. The back-on-route message goes to the same three. Nobody else is pinged, which keeps the group quiet and the LINE bill low. Note: the app's own wording says ออกนอกเส้นทาง and never หลง (docs/release2-routes.md, section 9); คนหลง on this slide is the presenter's word.
+
+SAY IF ASKED: nobody had to stop and wait or call (ไม่ต้องจอดรอ ไม่ต้องโทรตาม). CHECK BEFORE PRESENTING: that is how the team described the ride; drop it if that is not what happened.
+
+LEFT OUT ON PURPOSE: clock times; the screens keep their own timestamps as evidence.</aside>
+</section>

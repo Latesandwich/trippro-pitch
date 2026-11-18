@@ -1,0 +1,43 @@
+/* Site layer: the artifact viewer's base CSS scoped to the reveal slides, plus fixes for reveal's
+   default styles, so each slide lays out exactly as in the artifact (see tests/reference.html).
+   :where() keeps the viewer rules at their original, lowest specificity, so deck.css still wins. */
+
+/* viewer base */
+:where(body) { font: 32px/1.2 sans-serif; }
+:where(.reveal .slides section) *,
+:where(.reveal .slides section) { margin: 0; }
+:where(.reveal .slides section) h1 { font-size: 96px; font-weight: 600; }
+:where(.reveal .slides section) h2 { font-size: 64px; font-weight: 600; }
+:where(.reveal .slides section) h3 { font-size: 44px; font-weight: 600; }
+:where(.reveal .slides section) :is(p, li, h1, h2, h3, td, th) { overflow-wrap: break-word; text-wrap: pretty; }
+:where(.reveal .slides section) :is(x-icon, x-shape) { display: block; }
+:where(.reveal .slides section) aside { display: none; }
+.reveal .slides section {
+  width: 1920px;
+  height: 1080px;
+  box-sizing: border-box;
+  position: absolute;
+  isolation: isolate;
+  overflow: hidden;
+  text-align: start;
+  top: 0;
+  left: 0;
+}
+
+/* reveal fixes */
+html, body, .reveal-viewport { margin: 0; height: 100%; background: #121316; overflow: hidden; }
+.reveal .slides section { perspective: none; }
+/* reveal's fade rule (transition: opacity .5s) comes after its speed rule and resets the duration. */
+.reveal[data-transition-speed] .slides > section[data-transition] { transition-duration: 0.4s; }
+.reveal .slides section { transition-duration: 0.4s; }
+
+/* page numbers come from data-page (js/app.js); CSS counters break on hidden reveal slides */
+.reveal .pn::after { content: none; }
+
+/* the .in1-.in5 rise is replayed by the motion engine in GSAP. In the artifact the finished rise
+   keeps translateY(0), which makes each .in* block its own stacking context and paints it above
+   absolutely positioned pictures (the cover's .bleed photo); `translate: 0px` keeps that paint order. */
+.reveal .slides section :is(.in1, .in2, .in3, .in4, .in5) { animation: none; translate: 0px 0px; }
+
+/* click-step fragments carry no content and must not take part in the slide's flex layout */
+.reveal .slides section .motion-step { position: absolute; width: 0; height: 0; overflow: hidden; pointer-events: none; }

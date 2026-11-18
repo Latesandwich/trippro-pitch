@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TripPRO Pitch: cue sheet</title>
+<link rel="stylesheet" href="css/fonts.css">
+<style>
+  @page { size: A4; margin: 14mm; }
+  body { font: 11pt/1.45 "Anuphan", "Noto Sans Thai", sans-serif; color: #141518; background: #fff; margin: 0 auto; max-width: 190mm; padding: 8mm 4mm; }
+  h1 { font-size: 16pt; margin: 0 0 4mm; }
+  ol { list-style: none; margin: 0; padding: 0; }
+  li { break-inside: avoid; padding: 1.2mm 0; border-bottom: 0.2mm solid #ddd; }
+  .head { font-weight: 600; }
+  .head .id { color: #C2410C; }
+  .click { margin: 0.6mm 0 0 7mm; color: #333; }
+  @media print { body { padding: 0; } }
+</style>
+</head>
+<body>
+<h1>TripPRO Pitch: ใบคิว (หน้า · id · บรรทัดแรกของ SAY)</h1>
+<ol id="cues"></ol>
+<script type="module">
+import motions from './js/slides/index.js';
+
+const get = async url => (await fetch(url)).text();
+const meta = JSON.parse(await get('deck.json'));
+const steps = Object.fromEntries(motions.map(m => [m.id, m.steps]));
+const list = document.getElementById('cues');
+
+const pages = await Promise.all(meta.order.map(id => get(`slides/${id}.html`)));
+meta.order.forEach((id, i) => {
+  const doc = new DOMParser().parseFromString(pages[i], 'text/html');
+  const say = (doc.querySelector('aside')?.textContent || '').trim().split('\n')[0];
+  const li = document.createElement('li');
+  const head = document.createElement('div');
+  head.className = 'head';
+  const idEl = document.createElement('span');
+  idEl.className = 'id';
+  idEl.textContent = id;
+  head.append(`${i + 1} · `, idEl, ` · ${say}`);
+  li.append(head);
+  (steps[id] || []).forEach((label, k) => {
+    const click = document.createElement('div');
+    click.className = 'click';
+    click.textContent = `▶ คลิก ${k + 1}: ${label}`;
+    li.append(click);
+  });
+  list.append(li);
+});
+document.body.dataset.ready = '1';
+</script>
+</body>
+</html>
